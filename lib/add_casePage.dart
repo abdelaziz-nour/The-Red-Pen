@@ -116,6 +116,12 @@ class AddCase extends StatelessWidget {
                             decoration:
                                 InputDecoration(hintText: "Semester number"),
                             controller: semsterController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter semster number';
+                              }
+                              return null;
+                            },
                           ),
                           SizedBox(
                             height: 20,
@@ -124,6 +130,12 @@ class AddCase extends StatelessWidget {
                             decoration:
                                 InputDecoration(hintText: "Education dues"),
                             controller: amountController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter education dues';
+                              }
+                              return null;
+                            },
                           ),
                           SizedBox(
                             height: 20,

@@ -129,6 +129,7 @@ class CasesClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        primary: false,
         shrinkWrap: true,
         itemCount: list == null ? 0 : list.length,
         itemBuilder: (context, i) {
@@ -145,7 +146,7 @@ class CasesClass extends StatelessWidget {
               title: Text('ID: ${list[i]['student']}'),
               subtitle: Text(
                   'Semester : ${list[i]['student_semester']}\nAmount: ${list[i]['donation_amount']}'),
-              trailing: Text('${(list[i]['donation_time']).substring(0, 16)}'),
+              trailing: Text('${(list[i]['donation_time']).substring(0, 10)}'+ '  ${(list[i]['donation_time']).substring(11, 16)}'),
               isThreeLine: true,
             ),
           );

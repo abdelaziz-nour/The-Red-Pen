@@ -71,19 +71,36 @@ class AddPayment extends StatelessWidget {
                     color: Colors.white,
                     elevation: 0,
                   ),
-                  Container(
-                    margin: EdgeInsets.all(20),
-                    child: Center(
-                        child: Text(
-                      "Save",
-                      style: TextStyle(fontSize: 25, color: Colors.white),
-                    )),
-                    height: MediaQuery.of(context).size.height / 12,
-                    width: MediaQuery.of(context).size.height / 4,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                        color: Colors.pink),
-                  ),
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height / 15,
+                      width: MediaQuery.of(context).size.height / 3,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.pink),
+                        ),
+                        child: Text('save'),
+                        onPressed: () {
+                          showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: new Text('Failed'),
+              content: new Text('This feature is not available yet.'),
+              actions: <Widget>[
+                new ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.pink),
+                    child: new Text(
+                      'Close',
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    })
+              ]);
+        });
+                        },
+                      ),
+                    ),
                 ])),
           ),
         ],

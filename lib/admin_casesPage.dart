@@ -112,6 +112,7 @@ class CasesClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        primary: false,
         shrinkWrap: true,
         itemCount: list == null ? 0 : list.length,
         itemBuilder: (context, i) {

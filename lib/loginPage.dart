@@ -247,6 +247,7 @@ class Welcome extends StatelessWidget {
                                               ]);
                                         });
                                   }
+                                  checker = false;
                                 }
                               },
                               child: Container(

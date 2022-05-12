@@ -114,7 +114,7 @@ class _PaymentState extends State<Payment> {
                       Icon(
                         Icons.person,
                         color: Colors.pink,
-                        size: 300,
+                        size: MediaQuery.of(context).size.height/2,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -146,11 +146,24 @@ class _PaymentState extends State<Payment> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Student Education Fees :',
+                            'Fees :',
                             style: TextStyle(color: Colors.pink, fontSize: 25),
                           ),
                           Text(
                             (list[index]['student_education_dues']).toString(),
+                            style: TextStyle(color: Colors.black, fontSize: 25),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                                'Details : ',
+                                style: TextStyle(color: Colors.pink, fontSize: 25),
+                              ),
+                              Text(
+                            (list[index]['student_details']).toString(),
                             style: TextStyle(color: Colors.black, fontSize: 25),
                           ),
                         ],

@@ -73,67 +73,71 @@ class CasesClass extends StatelessWidget {
       shrinkWrap: true,
       children: [
         ListView.builder(
+            primary: false,
             shrinkWrap: true,
             itemCount: list == null ? 0 : 1,
             itemBuilder: (context, index) {
-              return SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: DataTable(
-                  columns: [
-                    DataColumn(
-                      label: Text(
-                        'No',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.pink,
+              return Center(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    columnSpacing: MediaQuery.of(context).size.width / 6,
+                    columns: [
+                      DataColumn(
+                        label: Text(
+                          'No',
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: Colors.pink,
+                          ),
                         ),
                       ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Amount',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.pink,
+                      DataColumn(
+                        label: Text(
+                          'Amount',
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: Colors.pink,
+                          ),
                         ),
                       ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Date',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.pink,
+                      DataColumn(
+                        label: Text(
+                          'Date',
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: Colors.pink,
+                          ),
                         ),
                       ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Time',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.pink,
+                      DataColumn(
+                        label: Text(
+                          'Time',
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: Colors.pink,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                  rows: map.entries
-                      .map(
-                        (entry) => DataRow(
-                          cells: [
-                            DataCell(Text(((entry.key).toString()))),
-                            DataCell(Text(
-                                (entry.value['donation_amount']).toString())),
-                            DataCell(Text(((entry.value['donation_time'])
-                                .toString()
-                                .substring(0, 10)))),
-                            DataCell(Text(((entry.value['donation_time'])
-                                .toString()
-                                .substring(11, 16)))),
-                          ],
-                        ),
-                      )
-                      .toList(),
+                    ],
+                    rows: map.entries
+                        .map(
+                          (entry) => DataRow(
+                            cells: [
+                              DataCell(Text(((entry.key).toString()))),
+                              DataCell(Text(
+                                  (entry.value['donation_amount']).toString())),
+                              DataCell(Text(((entry.value['donation_time'])
+                                  .toString()
+                                  .substring(0, 10)))),
+                              DataCell(Text(((entry.value['donation_time'])
+                                  .toString()
+                                  .substring(11, 16)))),
+                            ],
+                          ),
+                        )
+                        .toList(),
+                  ),
                 ),
               );
             }),

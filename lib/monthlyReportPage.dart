@@ -27,7 +27,7 @@ class Report extends StatelessWidget {
             ],
           ),
         ),
-        body: ListView(children: [
+        body: ListView(shrinkWrap: true, children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Row(
@@ -65,79 +65,85 @@ class CasesClass extends StatelessWidget {
   Widget build(BuildContext context) {
     Map map = list.asMap();
 
-    return ListView(
-      shrinkWrap: true,
+    return Column(
       children: [
         ListView.builder(
             shrinkWrap: true,
+            primary: false,
             itemCount: list == null ? 0 : 1,
             itemBuilder: (context, index) {
-              return SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: DataTable(
-                  columns: [
-                    DataColumn(
-                      label: Text(
-                        'No',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.pink,
+              return Center(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: DataTable(
+                      columns: [
+                        DataColumn(
+                          label: Text(
+                            'No',
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              color: Colors.pink,
+                            ),
+                          ),
                         ),
-                      ),
+                        DataColumn(
+                          label: Text(
+                            'Donor',
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              color: Colors.pink,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'Student ID',
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              color: Colors.pink,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'Amount',
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              color: Colors.pink,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'Date And Time',
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              color: Colors.pink,
+                            ),
+                          ),
+                        ),
+                      ],
+                      rows: map.entries
+                          .map(
+                            (entry) => DataRow(
+                              cells: [
+                                DataCell(Text((entry.key).toString())),
+                                DataCell(Text(entry.value['donor'])),
+                                DataCell(
+                                    Text((entry.value['student']).toString())),
+                                DataCell(Text((entry.value['donation_amount'])
+                                    .toString())),
+                                DataCell(Text(
+                                    '${entry.value['date'].substring(0, 10)}' +
+                                        '  ${entry.value['date'].substring(11, 16)}')),
+                              ],
+                            ),
+                          )
+                          .toList(),
                     ),
-                    DataColumn(
-                      label: Text(
-                        'Donor',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.pink,
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Student ID',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.pink,
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Amount',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.pink,
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Date And Time',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.pink,
-                        ),
-                      ),
-                    ),
-                  ],
-                  rows: map.entries
-                      .map(
-                        (entry) => DataRow(
-                          cells: [
-                            DataCell(Text(((entry.key).toString()))),
-                            DataCell(Text(((entry.value['donor'])))),
-                            DataCell(
-                                Text(((entry.value['student']).toString()))),
-                            DataCell(Text(
-                                ((entry.value['donation_amount']).toString()))),
-                            DataCell(
-                                Text(((entry.value['date'].substring(0, 16))))),
-                          ],
-                        ),
-                      )
-                      .toList(),
+                  ),
                 ),
               );
             }),
