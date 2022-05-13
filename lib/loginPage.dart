@@ -8,7 +8,7 @@ import 'package:training/registerPage.dart';
 class Welcome extends StatelessWidget {
   Welcome({Key? key}) : super(key: key);
 
-  final _formKey = GlobalKey<FormState>();
+  final _LoginformKey = GlobalKey<FormState>();
   final _formkeySudent = GlobalKey<FormState>();
   final passwordController = TextEditingController();
   final usernameController = TextEditingController();
@@ -86,7 +86,7 @@ class Welcome extends StatelessWidget {
               ],
             ),
             Form(
-                key: _formKey,
+                key: _LoginformKey,
                 child: Column(
                   children: [
                     Padding(
@@ -157,7 +157,7 @@ class Welcome extends StatelessWidget {
                         ),
                         child: Text('Login'),
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
+                          if (_LoginformKey.currentState!.validate()) {
                             _onPressed(context);
                           }
                         },

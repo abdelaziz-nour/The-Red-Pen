@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:training/add_casePage.dart';
 import 'package:training/apiModels/my_api.dart';
 import 'package:training/monthlyReportPage.dart';
-import 'package:training/paymentPage.dart';
 import 'loginPage.dart';
 
 class AdminCases extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:training/DonatePage.dart';
 import 'package:training/add_paymentMethodPage.dart';
 import 'package:training/apiModels/my_api.dart';
 import 'package:training/donationsHistoryPage.dart';
-import 'package:training/paymentPage.dart';
 import 'loginPage.dart';
 
 class Cases extends StatelessWidget {
@@ -139,7 +139,7 @@ class CasesClass extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Payment(list, i, username1)),
+                        builder: (context) => Donate(username1, list, i)),
                   );
                 },
                 child: Text(

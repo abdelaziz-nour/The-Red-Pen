@@ -7,7 +7,7 @@ import 'monthlyReportPage.dart';
 class AddCase extends StatelessWidget {
   final String username;
   AddCase(this.username);
-  final _formKey = GlobalKey<FormState>();
+  final _AddcaseformKey = GlobalKey<FormState>();
   final semsterController = TextEditingController();
   final amountController = TextEditingController();
   final detailsController = TextEditingController();
@@ -109,7 +109,7 @@ class AddCase extends StatelessWidget {
                     ],
                   ),
                   Form(
-                      key: _formKey,
+                      key: _AddcaseformKey,
                       child: Column(
                         children: [
                           TextFormField(
@@ -169,7 +169,7 @@ class AddCase extends StatelessWidget {
                       ),
                       child: Text('Add'),
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
+                        if (_AddcaseformKey.currentState!.validate()) {
                           _onPressed(context);
                         }
                       },

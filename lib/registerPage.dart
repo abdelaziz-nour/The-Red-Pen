@@ -12,7 +12,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final _formKey = GlobalKey<FormState>();
+  final _RegisterformKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -89,7 +89,7 @@ class _RegisterState extends State<Register> {
                     height: 20,
                   ),
                   Form(
-                      key: _formKey,
+                      key: _RegisterformKey,
                       child: Column(
                         children: [
                           TextFormField(
@@ -180,7 +180,7 @@ class _RegisterState extends State<Register> {
                               ),
                               child: Text('Register'),
                               onPressed: () {
-                                if (_formKey.currentState!.validate()) {
+                                if (_RegisterformKey.currentState!.validate()) {
                                   _onPressed(context);
                                 }
                               },
