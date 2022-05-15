@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -195,5 +196,38 @@ class DatabaseHelper {
     final key = 'token';
     final value = prefs.get(key) ?? 0;
     print('read : $value');
+  }
+
+  void showMyDialog(
+      {required context,
+      required String title,
+      required String content,
+      var page}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: new Text(title),
+              content: new Text(content),
+              actions: <Widget>[
+                new ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.pink),
+                    child: new Text(
+                      'Close',
+                    ),
+                    onPressed: () {
+                      if (title == 'Failed') {
+                        Navigator.of(context).pop();
+                      } else {
+                        Navigator.push<void>(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => page,
+                          ),
+                        );
+                      }
+                    })
+              ]);
+        });
   }
 }

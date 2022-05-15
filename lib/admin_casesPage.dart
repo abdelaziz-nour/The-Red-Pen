@@ -5,6 +5,8 @@ import 'package:training/monthlyReportPage.dart';
 import 'loginPage.dart';
 
 class AdminCases extends StatelessWidget {
+  final String username;
+  AdminCases(this.username);
   @override
   Widget build(BuildContext context) {
     DatabaseHelper _databaseHelper = DatabaseHelper();
@@ -50,7 +52,7 @@ class AdminCases extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.hasError) print(snapshot.error);
                 return snapshot.hasData
-                    ? new CasesClass(snapshot.data, 'Admin')
+                    ? new AdminCasesClass(snapshot.data, 'Admin')
                     : new Center(
                         child: new CircularProgressIndicator(),
                       );
@@ -104,10 +106,10 @@ class AdminCases extends StatelessWidget {
   }
 }
 
-class CasesClass extends StatelessWidget {
+class AdminCasesClass extends StatelessWidget {
   final list;
   final String username1;
-  CasesClass(this.list, this.username1);
+  AdminCasesClass(this.list, this.username1);
   @override
   Widget build(BuildContext context) {
     return ListView.builder(

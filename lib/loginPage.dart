@@ -167,7 +167,8 @@ class Welcome extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => AdminCases()),
+                          MaterialPageRoute(
+                              builder: (context) => AdminCases('Admin')),
                         );
                       },
                       child: Container(

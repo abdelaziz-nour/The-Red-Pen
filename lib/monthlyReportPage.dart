@@ -160,14 +160,3 @@ class CasesClass extends StatelessWidget {
     );
   }
 }
-
-
-
-/*
-DataRow(cells: [
-          DataCell(Container(child: Text(list[index]['donor']))),
-          DataCell(Container(child: Text('${list[index]['student']}'))),
-          DataCell(Container(child: Text('${list[index]['donation_amount']}'))),
-          DataCell(Container(child: Text('${list[index]['date']}')))
-        ]);
-*/

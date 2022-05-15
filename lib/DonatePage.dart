@@ -26,44 +26,22 @@ class _DonateState extends State<Donate> {
   DatabaseHelper _databaseHelper = DatabaseHelper();
   final _amountformKey = GlobalKey<FormState>();
 
-  void _showDialog(context, String title, String content) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              title: new Text(title),
-              content: new Text(content),
-              actions: <Widget>[
-                new ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.pink),
-                    child: new Text(
-                      'Close',
-                    ),
-                    onPressed: () {
-                      if (title == 'Failed') {
-                        Navigator.of(context).pop();
-                      } else {
-                        Navigator.push<void>(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => Cases(username),
-                          ),
-                        );
-                      }
-                    })
-              ]);
-        });
-  }
-
   _onPressed(context) async {
     await _databaseHelper.donate(
       list[index]['id'],
       int.parse(_amountController.text.trim()),
     );
     if (_databaseHelper.status) {
-      _showDialog(context, 'Failed', 'Donations failed please try again');
+      _databaseHelper.showMyDialog(
+          context: context,
+          title: 'Failed',
+          content: 'Donations failed please try again');
     } else {
-      _showDialog(context, 'Success', 'Donation done successfully.');
+      _databaseHelper.showMyDialog(
+          context: context,
+          title: 'Success',
+          content: 'Donation done successfully.',
+          page: Cases(username));
     }
   }
 
@@ -134,6 +112,19 @@ class _DonateState extends State<Donate> {
               ),
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Details : ',
+                style: TextStyle(color: Colors.pink, fontSize: 25),
+              ),
+              Text(
+                (list[index]['student_details']).toString(),
+                style: TextStyle(color: Colors.black, fontSize: 25),
+              ),
+            ],
+          ),
           Form(
             key: _amountformKey,
             child: Row(
@@ -177,8 +168,6 @@ class _DonateState extends State<Donate> {
               onPressed: () {
                 if (_amountformKey.currentState!.validate()) {
                   _onPressed(context);
-                  _showDialog(
-                      context, 'Success', 'Donations done successfully.');
                 }
               },
             ),

@@ -1,5 +1,6 @@
 import 'dart:core';
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:training/LoginPage.dart';
 import 'package:training/apiModels/my_api.dart';
@@ -21,27 +22,6 @@ class _RegisterState extends State<Register> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final DatabaseHelper _databaseHelper = DatabaseHelper();
 
-  void _showDialog(context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              title: new Text('Failed'),
-              content: new Text(
-                  'Username must be unique and email should be like abc@abc.abc'),
-              actions: <Widget>[
-                new ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.pink),
-                    child: new Text(
-                      'Close',
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    })
-              ]);
-        });
-  }
-
   _onPressed(context) async {
     await _databaseHelper.registerData(
         usernameController.text.trim(),
@@ -53,7 +33,10 @@ class _RegisterState extends State<Register> {
         _databaseHelper.loginUsernameStatus ||
         _databaseHelper.loginEmailStatus ||
         _databaseHelper.loginEmailStatus1) {
-      _showDialog(context);
+      _databaseHelper.showMyDialog(
+          context: context,
+          title: 'Failed',
+          content: 'Username and password must be unique');
     } else
       Navigator.push<void>(
         context,
@@ -112,12 +95,10 @@ class _RegisterState extends State<Register> {
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 hintText: 'email'),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter you Email';
-                              }
-                              return null;
-                            },
+                            validator: (value) =>
+                                EmailValidator.validate(value!)
+                                    ? null
+                                    : "Please enter a valid email",
                             controller: emailController,
                           ),
                           SizedBox(
@@ -129,8 +110,10 @@ class _RegisterState extends State<Register> {
                                 border: OutlineInputBorder(),
                                 hintText: 'password'),
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter some text';
+                              if (value == null ||
+                                  value.isEmpty ||
+                                  value.length <= 5) {
+                                return 'Password length must be 6 or more';
                               }
                               return null;
                             },

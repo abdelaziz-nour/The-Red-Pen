@@ -146,7 +146,6 @@ class CasesClass extends StatelessWidget {
                   'Donate',
                   style: TextStyle(color: Colors.white),
                 ),
-                //style: ElevatedButton.styleFrom(primary: Colors.pink),
               ),
               isThreeLine: true,
             ),

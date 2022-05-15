@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:training/apiModels/my_api.dart';
 import 'package:training/casesPage.dart';
 import 'package:training/loginPage.dart';
 import 'donationsHistoryPage.dart';
@@ -72,35 +73,23 @@ class AddPayment extends StatelessWidget {
                     elevation: 0,
                   ),
                   SizedBox(
-                      height: MediaQuery.of(context).size.height / 15,
-                      width: MediaQuery.of(context).size.height / 3,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.pink),
-                        ),
-                        child: Text('save'),
-                        onPressed: () {
-                          showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              title: new Text('Failed'),
-              content: new Text('This feature is not available yet.'),
-              actions: <Widget>[
-                new ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.pink),
-                    child: new Text(
-                      'Close',
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    })
-              ]);
-        });
-                        },
+                    height: MediaQuery.of(context).size.height / 15,
+                    width: MediaQuery.of(context).size.height / 3,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.pink),
                       ),
+                      child: Text('save'),
+                      onPressed: () {
+                        DatabaseHelper _databaseHelper = DatabaseHelper();
+                        _databaseHelper.showMyDialog(
+                            context: context,
+                            title: 'Failed',
+                            content: 'This feautre is not available yet.');
+                      },
                     ),
+                  ),
                 ])),
           ),
         ],

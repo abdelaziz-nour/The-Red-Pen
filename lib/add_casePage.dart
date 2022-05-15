@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:training/casesPage.dart';
 import 'package:training/loginPage.dart';
+import 'admin_casesPage.dart';
 import 'apiModels/my_api.dart';
 import 'monthlyReportPage.dart';
 
@@ -13,59 +13,24 @@ class AddCase extends StatelessWidget {
   final detailsController = TextEditingController();
   final DatabaseHelper _databaseHelper = DatabaseHelper();
 
-  void _showDialog(context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              title: new Text('Failed'),
-              content: new Text('Failed to add new student'),
-              actions: <Widget>[
-                new ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.pink),
-                    child: new Text(
-                      'Close',
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    })
-              ]);
-        });
-  }
-
-  void _showSuccessMessage(context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              title: new Text('Success'),
-              content: new Text('Student added successfully'),
-              actions: <Widget>[
-                new ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.pink),
-                    child: new Text(
-                      'Close',
-                    ),
-                    onPressed: () {
-                      Navigator.push<void>(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => Cases(username),
-                          ));
-                    })
-              ]);
-        });
-  }
-
   _onPressed(context) async {
     await _databaseHelper.addStudent((int.parse(semsterController.text.trim())),
         (int.parse(amountController.text.trim())), detailsController.text);
     if (_databaseHelper.status) {
       print(_databaseHelper.status);
-      _showDialog(context);
+      _databaseHelper.showMyDialog(
+        context: context,
+        title: 'Failed',
+        content: 'Adding student failed please try again',
+      );
     } else
       print(_databaseHelper.status);
-    _showSuccessMessage(context);
+    _databaseHelper.showMyDialog(
+      context: context,
+      title: 'Success',
+      content: 'Student added successfully.',
+      page: AdminCases('Admin'),
+    );
   }
 
   @override

@@ -48,7 +48,7 @@ class History extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasError) print(snapshot.error);
             return snapshot.hasData
-                ? new CasesClass(list: snapshot.data)
+                ? new DonationHistoryClass(list: snapshot.data)
                 : new Center(
                     child: new CircularProgressIndicator(),
                   );
@@ -101,31 +101,9 @@ class History extends StatelessWidget {
   }
 }
 
-Widget cases(int first, int second, int third) {
-  return Card(
-    shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.pink, width: 1),
-        borderRadius: BorderRadius.circular(15)),
-    child: ListTile(
-      leading: Icon(
-        Icons.person,
-        size: 50,
-        color: Colors.pink,
-      ),
-      title: Text('ID: $first'),
-      subtitle: Text('Semester : $second\nAmount: $third'),
-      trailing: Text(
-        'DD/MM/YY',
-        style: TextStyle(color: Colors.pink, fontSize: 15),
-      ),
-      isThreeLine: true,
-    ),
-  );
-}
-
-class CasesClass extends StatelessWidget {
-  var list;
-  CasesClass({required this.list});
+class DonationHistoryClass extends StatelessWidget {
+  final list;
+  DonationHistoryClass({required this.list});
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -146,7 +124,8 @@ class CasesClass extends StatelessWidget {
               title: Text('ID: ${list[i]['student']}'),
               subtitle: Text(
                   'Semester : ${list[i]['student_semester']}\nAmount: ${list[i]['donation_amount']}'),
-              trailing: Text('${(list[i]['donation_time']).substring(0, 10)}'+ '  ${(list[i]['donation_time']).substring(11, 16)}'),
+              trailing: Text('${(list[i]['donation_time']).substring(0, 10)}' +
+                  '  ${(list[i]['donation_time']).substring(11, 16)}'),
               isThreeLine: true,
             ),
           );
